@@ -3,6 +3,8 @@
  */
 package com.catalyst.android.birdapp.test;
 
+import java.util.Locale;
+
 import com.catalyst.android.birdapp.CameraActivity;
 import com.jayway.android.robotium.solo.Solo;
 import android.hardware.Camera;
@@ -51,35 +53,78 @@ public class CameraActivityTest extends ActivityInstrumentationTestCase2<CameraA
 	 * Tests that the zoom spinner saves the specified zoom size
 	 */
 public void testZoomSettingPreference(){
-	int positionNumber = 3;
+	int positionNumber = 5;
 	solo.clickOnImageButton(0);
 	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
 	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
 	zoomSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.zoom_spinner);
-	resolutionSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.resolution_spinner);
-	previewSizeSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.picture_size_spinner);
-	whiteBalanceSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.white_balance_spinner);
 	solo.pressSpinnerItem(0, positionNumber);
-	String zoomTest = zoomSpinner.getItemAtPosition(positionNumber).toString();
-	solo.pressSpinnerItem(1, positionNumber);
-	String resolutionTest = resolutionSpinner.getItemAtPosition(positionNumber).toString();
-	solo.pressSpinnerItem(2, positionNumber);
-	String previewTest = previewSizeSpinner.getItemAtPosition(positionNumber).toString();
-	solo.pressSpinnerItem(3, positionNumber);
-	String whiteBalanceTests = whiteBalanceSpinner.getItemAtPosition(positionNumber).toString();
+	String spinnerTest = zoomSpinner.getItemAtPosition(positionNumber).toString();
 	solo.clickOnView(saveButton);
 	solo.clickOnImageButton(0);
-	String zoomChoice = zoomSpinner.getSelectedItem().toString();
-	String resolutionChoice = resolutionSpinner.getSelectedItem().toString();
-	String previewChoice = previewSizeSpinner.getSelectedItem().toString();
-	String whiteBalanceChoice = whiteBalanceSpinner.getSelectedItem().toString();
-	assertEquals(zoomTest, zoomChoice);
-	assertEquals(resolutionTest, resolutionChoice);
-	assertEquals(previewTest, previewChoice);
-	assertEquals(whiteBalanceTests, whiteBalanceChoice);
+	String test = zoomSpinner.getSelectedItem().toString();
+	assertEquals(spinnerTest, test);
 	solo.clickOnView(defaultButton);
+	solo.finishOpenedActivities();
 	
 }
+/**
+ * Tests that the resolution spinner saves the specified resolution size
+ */
+public void testResolutionSettingPreference(){
+	int positionNumber = 5;
+	solo.clickOnImageButton(0);
+	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
+	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
+	resolutionSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.resolution_spinner);
+	solo.pressSpinnerItem(1, positionNumber);
+	String spinnerTest = resolutionSpinner.getItemAtPosition(positionNumber).toString();
+	solo.clickOnView(saveButton);
+	solo.clickOnImageButton(0);
+	String test = resolutionSpinner.getSelectedItem().toString();
+	assertEquals(spinnerTest, test);
+	solo.clickOnView(defaultButton);
+	solo.finishOpenedActivities();
+}
+/**
+ * Tests that the preview spinner saves the specified preview size
+ */
+public void testPreviewSettingPreference(){
+	int positionNumber = 5;
+	solo.clickOnImageButton(0);
+	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
+	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
+	previewSizeSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.picture_size_spinner);
+	solo.pressSpinnerItem(2, positionNumber);
+	String spinnerTest = previewSizeSpinner.getItemAtPosition(positionNumber).toString();
+	solo.clickOnView(saveButton);
+	solo.clickOnImageButton(0);
+	String test = previewSizeSpinner.getSelectedItem().toString();
+	assertEquals(spinnerTest, test);
+	solo.clickOnView(defaultButton);
+	solo.finishOpenedActivities();
+}
+
+/**
+ * Tests that the white balance spinner saves the specified white balance setting
+ */
+
+public void testWhiteBalanceSettingPreference(){
+	int positionNumber = 3;
+	solo.clickOnImageButton(0);
+	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
+	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
+	whiteBalanceSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.white_balance_spinner);
+	solo.pressSpinnerItem(3, positionNumber);
+	String spinnerTest = whiteBalanceSpinner.getItemAtPosition(positionNumber).toString();
+	solo.clickOnView(saveButton);
+	solo.clickOnImageButton(0);
+	String test = whiteBalanceSpinner.getSelectedItem().toString();
+	assertEquals(spinnerTest, test);
+	solo.clickOnView(defaultButton);
+	solo.finishOpenedActivities();
+}
+
 /**
  * Tests the restore defaults button
  */
@@ -95,6 +140,7 @@ public void testRestoreDefaultsButton(){
 	solo.clickOnImageButton(0);
 	solo.clickOnView(defaultButton);
 	assertEquals(whiteBalanceSpinner.getSelectedItem().toString(), whiteBalanceSpinner.getItemAtPosition(0));
+	solo.finishOpenedActivities();
 }
 /**
  * tests to make sure that the white balance parameters are being set on click on the save button
@@ -106,10 +152,12 @@ public void testParametersSetWhiteBalance(){
 	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
 	whiteBalanceSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.white_balance_spinner);
 	solo.pressSpinnerItem(3, positionNumber);
+	String test = whiteBalanceSpinner.getSelectedItem().toString().toLowerCase(Locale.US);
 	solo.clickOnView(saveButton);
 	params = camera.getParameters();
-	assertEquals("auto", params.getWhiteBalance());
+	assertEquals(test, params.getWhiteBalance());
 	solo.clickOnView(defaultButton);
+	solo.finishOpenedActivities();
 }
 /**
  * tests to make sure that the preview size parameters are being set on click on the save button
@@ -120,14 +168,15 @@ public void testParametersSetPreviewSize(){
 	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
 	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
 	previewSizeSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.picture_size_spinner);
-	String spinnerTest = previewSizeSpinner.getItemAtPosition(positionNumber).toString();
 	solo.pressSpinnerItem(2, positionNumber);
+	String spinnerTest = previewSizeSpinner.getItemAtPosition(positionNumber).toString();
 	solo.clickOnView(saveButton);
 	params = camera.getParameters();
 	Size size = params.getPreviewSize();
 	String preview = size.height + " X " + size.width;
 	assertEquals(spinnerTest, preview);
 	solo.clickOnView(defaultButton);
+	solo.finishOpenedActivities();
 }
 
 /**
@@ -139,14 +188,15 @@ public void testParametersSetResolution(){
 	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
 	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
 	resolutionSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.resolution_spinner);
-	String spinnerTest = resolutionSpinner.getItemAtPosition(positionNumber).toString();
 	solo.pressSpinnerItem(1, positionNumber);
+	String spinnerTest = resolutionSpinner.getItemAtPosition(positionNumber).toString();
 	solo.clickOnView(saveButton);
 	params = camera.getParameters();
 	Size size = params.getPictureSize();
 	String resolution = size.height + " X " + size.width;
 	assertEquals(spinnerTest, resolution);
 	solo.clickOnView(defaultButton);
+	solo.finishOpenedActivities();
 }
 
 /**
@@ -155,6 +205,9 @@ public void testParametersSetResolution(){
 
 public void testParametersSetZoom(){
 	int positionNumber = 5;
+	int test1 = 0;
+	String firstNumber;
+	String secondNumber;
 	solo.clickOnImageButton(0);
 	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
 	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
@@ -163,9 +216,16 @@ public void testParametersSetZoom(){
 	solo.pressSpinnerItem(0, positionNumber);
 	solo.clickOnView(saveButton);
 	params = camera.getParameters();
-	String firstNumber = String.valueOf(params.getZoom()).substring(0,1);
-	String secondNumber = String.valueOf(params.getZoom()).substring(1,2);
+	int spinnerNumber = zoomSpinner.getCount();	
+	if(positionNumber == spinnerNumber - 1){
+		
+		assertEquals(params.getZoom(), (spinnerNumber *10) - 1);
+	}else {
+	firstNumber = String.valueOf(params.getZoom()).substring(0,1);
+	secondNumber = String.valueOf(params.getZoom()).substring(1,2);
 	assertEquals(spinnerTest, firstNumber+"."+secondNumber+"x");
+	}
 	solo.clickOnView(defaultButton);
+	solo.finishOpenedActivities();
 }
 }
