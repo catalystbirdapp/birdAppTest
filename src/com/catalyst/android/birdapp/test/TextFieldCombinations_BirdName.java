@@ -82,11 +82,6 @@ public class TextFieldCombinations_BirdName extends
 		noText = getActivity().getResources().getString(idNoText);// "NO"
 		yesText = getActivity().getResources().getString(idYesText);// "YES"
 
-		noText = ((noText.substring(0, 1).toUpperCase()) + (noText.substring(1)
-				.toLowerCase()));// will be deleted
-		yesText = ((yesText.substring(0, 1).toUpperCase()) + (yesText
-				.substring(1).toLowerCase())); // will be deleted
-
 		birdNameLabelText = getActivity().getResources().getString(
 				idBirdNameLabelText);
 		birdNameLabelText = birdNameLabelText.substring(0,

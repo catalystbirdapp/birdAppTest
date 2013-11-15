@@ -85,6 +85,8 @@ public class Spinner_Activity extends
 		solo.clickOnView(activity); // opens up the activity spinner
 
 		solo.waitForText(activityPrompt);
+		solo.scrollToBottom();
+		solo.waitForText(flying);
 		solo.clickOnText(flying);
 
 		solo.waitForText(activityLabel);
@@ -110,6 +112,8 @@ public class Spinner_Activity extends
 		solo.searchText(activityPrompt);
 		solo.clickOnView(activity); // opens up the category spinner
 		solo.waitForText(activityPrompt);
+		solo.scrollToBottom();
+		solo.waitForText(hunting);
 		solo.clickOnText(hunting);
 
 		solo.waitForText(activityLabel);
@@ -134,6 +138,8 @@ public class Spinner_Activity extends
 		solo.searchText(activityPrompt);
 		solo.clickOnView(activity); // opens up the category spinner
 		solo.waitForText(activityPrompt);
+		solo.scrollToBottom();
+		solo.waitForText(swimming);
 		solo.clickOnText(swimming);
 
 		solo.waitForText(activityLabel);
@@ -158,6 +164,8 @@ public class Spinner_Activity extends
 		solo.searchText(activityPrompt);
 		solo.clickOnView(activity); // opens up the category spinner
 		solo.waitForText(activityPrompt);
+		solo.scrollToBottom();
+		solo.waitForText(mating);
 		solo.clickOnText(mating);
 
 		solo.waitForText(activityLabel);
