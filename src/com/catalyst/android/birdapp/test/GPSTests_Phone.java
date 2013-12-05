@@ -53,24 +53,25 @@ ActivityInstrumentationTestCase2<BirdFormActivity> {
 	/**
 	 * Tests that the checkbox can be checked and unchecked
 	 */
-	public void test_CheckBox_Checked_Unchecked() {
-		// TODo make sure the emulator is set up wit the GPS turned off
-
-		solo.assertCurrentActivity("Toggle checkbox off and on",
-				BirdFormActivity.class);
-		assertTrue(solo.waitForText("Bird Sighting Form"));
-		solo.clickOnCheckBox(0);
-		solo.sleep(1000);
-		solo.waitForText("unavailable");
-		solo.clickOnText("OK");
-		assertTrue(solo.waitForText("GPS is turned OFF"));
-		solo.clickOnButton("NO");
-		solo.isCheckBoxChecked(0);
-		solo.clickOnCheckBox(0);
-		assertFalse(solo.isCheckBoxChecked(0));
-		solo.finishOpenedActivities();
-
-	}
+	//Note:  this test case tests obsolete functionality
+//	public void test_CheckBox_Checked_Unchecked() {
+//		// TODo make sure the emulator is set up wit the GPS turned off
+//
+//		solo.assertCurrentActivity("Toggle checkbox off and on",
+//				BirdFormActivity.class);
+//		assertTrue(solo.waitForText("Bird Sighting Form"));
+//		solo.clickOnCheckBox(0);
+//		solo.sleep(1000);
+//		solo.waitForText("unavailable");
+//		solo.clickOnText("OK");
+//		assertTrue(solo.waitForText("GPS is turned OFF"));
+//		solo.clickOnButton("NO");
+//		solo.isCheckBoxChecked(0);
+//		solo.clickOnCheckBox(0);
+//		assertFalse(solo.isCheckBoxChecked(0));
+//		solo.finishOpenedActivities();
+//
+//	}
 	
 	/**
 	 * Leave the GPS unit turned off
@@ -80,18 +81,23 @@ ActivityInstrumentationTestCase2<BirdFormActivity> {
 
 			solo.assertCurrentActivity("GPS is turned off, don't turn it on",
 					BirdFormActivity.class);
-			assertTrue(solo.waitForText("Bird Sighting Form"));
-
-			solo.clickOnCheckBox(0);
-
-			solo.sleep(2000);
-
-			solo.clickOnText("OK");
+//			assertTrue(solo.waitForText("Bird Sighting Form"));
+//
+//			solo.clickOnCheckBox(0);
+//
+//			solo.sleep(2000);
+//
+//			solo.clickOnText("OK");
 
 			assertTrue(solo.waitForText("GPS is turned OFF"));
 			solo.clickOnButton("NO");
 			
+			assertTrue(solo.waitForText("Bird Sighting Form"));
 			assertTrue(solo.waitForText("Coordinates not available"));
+			
+			//change back to the default preference
+			solo.clickOnMenuItem("Settings");
+			solo.clickOnCheckBox(0);
 			
 			solo.finishOpenedActivities();
 		}
@@ -104,19 +110,18 @@ ActivityInstrumentationTestCase2<BirdFormActivity> {
 
 			solo.assertCurrentActivity("GPS is turned off, turn it on",
 					BirdFormActivity.class);
-			assertTrue(solo.waitForText("Bird Sighting Form"));
-
-			solo.clickOnCheckBox(0);
-
-			solo.sleep(2000);
-
-			solo.clickOnText("OK");
+//			assertTrue(solo.waitForText("Bird Sighting Form"));
+//
+//			solo.clickOnCheckBox(0);
+//
+//			solo.sleep(2000);
+//
+//			solo.clickOnText("OK");
 
 			assertTrue(solo.waitForText("GPS is turned OFF"));
 			solo.clickOnButton("YES");
 
 			solo.finishOpenedActivities();
-		}}
-
-
-	
+		}
+		
+}
