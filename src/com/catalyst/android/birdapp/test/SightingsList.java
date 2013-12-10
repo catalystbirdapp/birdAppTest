@@ -20,11 +20,11 @@ import com.catalyst.android.birdapp.database.DatabaseHandler;
 import com.catalyst.android.birdapp.entities.BirdSighting;
 import com.jayway.android.robotium.solo.Solo;
 
-public class ActivityList extends ActivityInstrumentationTestCase2<MainActivity> {
+public class SightingsList extends ActivityInstrumentationTestCase2<MainActivity> {
 	
     private Solo solo;
 
-	public ActivityList() {
+	public SightingsList() {
 		super(MainActivity.class);
 	}
 	
