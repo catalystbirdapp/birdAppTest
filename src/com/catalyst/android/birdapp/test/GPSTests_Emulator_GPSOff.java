@@ -14,7 +14,6 @@ import com.jayway.android.robotium.solo.Solo;
 public class GPSTests_Emulator_GPSOff extends
 ActivityInstrumentationTestCase2<BirdFormActivity> {
 	
-
     private Solo solo;
 
 	public GPSTests_Emulator_GPSOff() {
@@ -45,47 +44,57 @@ ActivityInstrumentationTestCase2<BirdFormActivity> {
 
 			solo.assertCurrentActivity("GPS is turned off, don't turn it on",
 					BirdFormActivity.class);
-			assertTrue(solo.waitForText("Bird Sighting Form"));
+//			assertTrue(solo.waitForText("Bird Sighting Form"));
 
-			solo.clickOnCheckBox(0);
+//			solo.clickOnCheckBox(0);
 
-			solo.sleep(2000);
+//			solo.sleep(2000);
 
-			solo.clickOnText("OK");
+//			solo.clickOnText("OK");
 
 			assertTrue(solo.waitForText("GPS is turned OFF"));
 			solo.clickOnButton("NO");
 			
+			assertTrue(solo.waitForText("Bird Sighting Form"));
 			assertTrue(solo.waitForText("Coordinates not available"));
+			
+			//change back to the default preference
+			solo.clickOnMenuItem("Settings");
+			solo.clickOnCheckBox(0);
 			
 			solo.finishOpenedActivities();
 		}
 
+	/**
+	 * will test up to the point that the device switches into the phone's 
+	 * GPS system--unable to test in the phone's GPS system
+	 */
 		public void test_Zy_AutoFill_GPSOff_TurnOn() {
 
 			solo.assertCurrentActivity("GPS is turned off, turn it on",
 					BirdFormActivity.class);
-			assertTrue(solo.waitForText("Bird Sighting Form"));
+//			assertTrue(solo.waitForText("Bird Sighting Form"));
 
-			solo.clickOnCheckBox(0);
+//			solo.clickOnCheckBox(0);
 
-			solo.sleep(2000);
+//			solo.sleep(2000);
 
-			solo.clickOnText("OK");
+//			solo.clickOnText("OK");
 
 			assertTrue(solo.waitForText("GPS is turned OFF"));
 			solo.clickOnButton("YES");
 
-			// below GPS text and check box is on Anna's phone
+//			// below GPS text and check box is on Anna's phone
 			solo.sleep(1000);
-			assertTrue(solo.searchText("Use GPS satellites"));
-			// solo.clickOnCheckBox(1);
-			// solo.goBack();
-			// below code is poor coding, need variables...
-			// assertTrue(solo.waitForText("45.51"));
-			// assertTrue(solo.waitForText("-122.83"));
+			assertTrue(solo.searchText("GPS satellites"));
+			solo.clickOnCheckBox(1);
+			solo.goBack();
+//			// below code is poor coding, need variables...
+			assertTrue(solo.waitForText("Bird Sighting Form"));
+//			assertTrue(solo.waitForText("45.51"));
+//			assertTrue(solo.waitForText("-122.83"));
+			
 			solo.finishOpenedActivities();
-		}}
-
-
-	
+		}
+		
+}
