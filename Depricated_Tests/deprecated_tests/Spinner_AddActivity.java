@@ -1,4 +1,4 @@
-package com.catalyst.android.birdapp.test;
+package deprecated_tests;
 
 import android.test.ActivityInstrumentationTestCase2;
 import com.catalyst.android.birdapp.BirdFormActivity;

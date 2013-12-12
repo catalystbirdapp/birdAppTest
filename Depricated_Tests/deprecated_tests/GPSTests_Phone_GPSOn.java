@@ -1,4 +1,4 @@
-package com.catalyst.android.birdapp.test;
+package deprecated_tests;
 
 import junit.framework.Assert;
 import android.content.Intent;

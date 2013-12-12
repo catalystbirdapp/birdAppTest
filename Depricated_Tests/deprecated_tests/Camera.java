@@ -1,4 +1,4 @@
-package com.catalyst.android.birdapp.test;
+package deprecated_tests;
 
 import com.catalyst.android.birdapp.BirdFormActivity;
 import com.catalyst.android.birdapp.R.id;
@@ -8,7 +8,7 @@ import com.jayway.android.robotium.solo.Solo;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-public class Camera_Overlay extends ActivityInstrumentationTestCase2<BirdFormActivity> {
+public class Camera extends ActivityInstrumentationTestCase2<BirdFormActivity> {
 
 	private Solo solo;
 
@@ -28,7 +28,7 @@ public class Camera_Overlay extends ActivityInstrumentationTestCase2<BirdFormAct
 	private String saveButtonText;
 	private String restoreDefaultButtonText;
 
-	public Camera_Overlay() {
+	public Camera() {
 		super(BirdFormActivity.class);
 	}
 
@@ -62,18 +62,26 @@ public class Camera_Overlay extends ActivityInstrumentationTestCase2<BirdFormAct
 		restoreDefaultButtonText = restoreDefaultButtonText.substring(0,4);
 	}
 
-
+	/**
+	 * When I click on the camera button, the camera will open.
+	 */
+	public void testOpenCamera() {
+		solo.assertCurrentActivity("testOpenCamera", BirdFormActivity.class);
+		solo.clickOnActionBarItem(id.action_camera);
+		solo.sleep(2000);
+		solo.finishOpenedActivities();
+	}
 
 	/**
-	 * With the GPS turned on in the PutABirdOnIt App, and I click on the camera button, the camera will open. When I click on
+	 * When I click on the camera button, the camera will open. When I click on
 	 * the image button I want to see the CameraSettingOverlay I want to verify
 	 * that the text is present for the overlay title.
 	 */
 	public void testClickOnImageButton() {
 		solo.assertCurrentActivity("testClickOnImageButton",
 				BirdFormActivity.class);
+
 		solo.clickOnActionBarItem(id.action_camera);
-		//solo.sleep(2000);
 		solo.clickOnImageButton(0);
 		solo.waitForText(settingTitleText);
 		assertTrue(solo.searchText(settingTitleText));

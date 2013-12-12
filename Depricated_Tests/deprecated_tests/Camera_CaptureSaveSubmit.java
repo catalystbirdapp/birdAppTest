@@ -1,4 +1,4 @@
-package com.catalyst.android.birdapp.test;
+package deprecated_tests;
 
 import com.catalyst.android.birdapp.BirdFormActivity;
 import com.catalyst.android.birdapp.R.id;
@@ -9,7 +9,7 @@ import com.jayway.android.robotium.solo.Solo;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
-public class Submit extends ActivityInstrumentationTestCase2<BirdFormActivity> {
+public class Camera_CaptureSaveSubmit extends ActivityInstrumentationTestCase2<BirdFormActivity> {
 
 	private String BIRD_NAME = "Prigogine's Double-collared Sunbird";
 	private String SCIENTIFIC_NAME = "Griseotyrannus aurantioatrocristatus aurantioatrocrista";
@@ -34,7 +34,7 @@ public class Submit extends ActivityInstrumentationTestCase2<BirdFormActivity> {
 
 	private Solo solo;
 
-	public Submit() {
+	public Camera_CaptureSaveSubmit() {
 		super(BirdFormActivity.class);
 	}
 
