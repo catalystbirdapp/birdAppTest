@@ -53,9 +53,9 @@ public class SightingsList extends ActivityInstrumentationTestCase2<MainActivity
 	 * 
 	 * Deletes the test sighting when test is complete.
 	 */
-	public void test_SightingsList_EndToEnd() {
-		String testCommonName = "Test Common Name";
-		String changedCommonName = "Changed Common Name";
+	public void testSightingsListEndToEnd() {
+		String testCommonName = "Sightings E to E Common Name";
+		String changedCommonName = "Changed Sightings E to E Common Name";
 		String testScientificName = "Test Scientific Name";
 		String testNotes = "Test Notes";
 		String category = "Misc";
@@ -69,7 +69,16 @@ public class SightingsList extends ActivityInstrumentationTestCase2<MainActivity
 		solo.assertCurrentActivity("Main Activity Page", MainActivity.class);
 		
 		//Navigate to new BIRD FORM page
-		solo.clickOnButton("Submit A Sighting");
+		solo.clickOnButton(solo.getString(R.string.submitButton).toString());
+		
+		//Deal with GPS prompt
+		if (solo.waitForText("GPS is turned OFF")) {
+			solo.clickOnButton("NO");
+			assertTrue(solo.waitForText("Prompting for GPS has been disabled"));
+		}
+		
+		//Verify current page is bird form
+		solo.scrollUp();
 		solo.assertCurrentActivity("Bird Sighting Page", BirdFormActivity.class);
 		assertTrue("on Bird Sighting Form", solo.waitForText("Bird Sighting Form"));
 		
@@ -83,6 +92,7 @@ public class SightingsList extends ActivityInstrumentationTestCase2<MainActivity
 		TextView addLongitude = (TextView) solo.getView(R.id.longitude_edit_text);
 		testDate = addDate.getText().toString();
 		testTime = addTime.getText().toString();
+		testTime = testTime.replaceFirst("^0", "");
 		testLatitude = addLatitude.getText().toString();
 		testLatitude = testLatitude.equals("") ? "0.0" : testLatitude;
 		testLongitude = addLongitude.getText().toString();

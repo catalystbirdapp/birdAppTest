@@ -40,7 +40,7 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<MainAct
 		super.tearDown();
 	}
 	
-	public void test_AAAAA_Close_GPS_Prompt() {
+	public void testAAAAACloseGPSPrompt() {
 		//Go to MAIN PAGE
 		solo.assertCurrentActivity("Main Activity Page", MainActivity.class);
 		
@@ -56,7 +56,7 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<MainAct
 		solo.finishOpenedActivities();
 	}
 	
-	public void test_Menu_And_Errors() {
+	public void testMenuAndErrors() {
 		String errorMessageBlank = solo.getString(R.string.add_activity_empty).toString();
 		String errorMessageInvalid = solo.getString(R.string.activity_alpha_error).toString();
 		String testInvalidActivityName = "Test 12/10/2013";
@@ -112,7 +112,7 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<MainAct
 		solo.finishOpenedActivities();
 	}
 	
-	public void test_Add_Too_Long_Name() {
+	public void testAddTooLongName() {
 		String testTooLongActivityName = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXZY";
 		String testSavedActivityName =   "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZabc";
 		Context context = solo.getCurrentActivity().getApplicationContext();
@@ -151,7 +151,7 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<MainAct
 		solo.finishOpenedActivities();
 	}
 	
-	public void test_Add_Good_Name() {
+	public void testAddGoodName() {
 		String testActivityName = "Test Activity Name";
 		Context context = solo.getCurrentActivity().getApplicationContext();
 		
@@ -188,7 +188,7 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<MainAct
 		solo.finishOpenedActivities();
 	}
 	
-	public void test_Add_Another_Checkbox() {
+	public void testAddAnotherCheckbox() {
 		String testFirstActivityName = "First Activity Name";
 		String testSecondActivityName = "Second Activity Name";
 		Context context = solo.getCurrentActivity().getApplicationContext();

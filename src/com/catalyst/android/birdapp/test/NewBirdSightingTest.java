@@ -42,7 +42,7 @@ public class NewBirdSightingTest extends ActivityInstrumentationTestCase2<MainAc
 		super.tearDown();
 	}
 	
-	public void test_AAAAA_Close_GPS_Prompt() {
+	public void testAAAAACloseGPSPrompt() {
 		//Go to MAIN PAGE
 		solo.assertCurrentActivity("Main Activity Page", MainActivity.class);
 		
@@ -58,7 +58,7 @@ public class NewBirdSightingTest extends ActivityInstrumentationTestCase2<MainAc
 		solo.finishOpenedActivities();
 	}
 	
-	public void test_Common_Name_Field_() {
+	public void testCommonNameField() {
 		String warningMessageBlank = "Bird Name";
 		String errorMessageInvalid = solo.getString(R.string.bird_name_alpha_error).toString();
 		String testInvalidName = "Test 12/10/2013";
@@ -119,7 +119,7 @@ public class NewBirdSightingTest extends ActivityInstrumentationTestCase2<MainAc
 		solo.finishOpenedActivities();
 	}
 	
-	public void test_Scientific_Name_Field_() {
+	public void testScientificNameField() {
 		String warningMessageBlank = "Scientific Name";
 		String errorMessageInvalid = solo.getString(R.string.scientific_name_alpha_error).toString();
 		String testInvalidName = "Test 12/10/2013";
@@ -182,7 +182,7 @@ public class NewBirdSightingTest extends ActivityInstrumentationTestCase2<MainAc
 		solo.finishOpenedActivities();
 	}
 	
-	public void test_Notes_Field() {
+	public void testNotesField() {
 		String warningMessageBlank = "Notes";
 		String testTooLongName = "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.  Now we are engaged in a great civil war, testing whether that nation, or anynation so conceived ";
 		String testSavedName =   "Four score and seven years ago our fathers brought forth on this continent, a new nation, conceived in Liberty, and dedicated to the proposition that all men are created equal.  Now we are engaged in a great civil war, testing whether that nation, or anyn";
@@ -234,7 +234,7 @@ public class NewBirdSightingTest extends ActivityInstrumentationTestCase2<MainAc
 		solo.finishOpenedActivities();
 	}
 	
-	public void test_Category_And_Activity() {
+	public void testCategoryAndActivity() {
 		String initialCategory = "Nest";
 		String newCategory = "Sighting";
 		String initialActivity = "Flying";
