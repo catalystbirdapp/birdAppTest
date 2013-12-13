@@ -53,7 +53,7 @@ public class CameraActivityTest extends ActivityInstrumentationTestCase2<CameraA
 	 * Tests that the zoom spinner saves the specified zoom size
 	 */
 public void testZoomSettingPreference(){
-	int positionNumber = 5;
+	int positionNumber = 2;
 	solo.clickOnImageButton(0);
 	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
 	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
@@ -68,42 +68,42 @@ public void testZoomSettingPreference(){
 	solo.finishOpenedActivities();
 	
 }
-///**
-// * Tests that the resolution spinner saves the specified resolution size
-// */
-//public void testResolutionSettingPreference(){
-//	int positionNumber = 5;
-//	solo.clickOnImageButton(0);
-//	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
-//	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
-//	resolutionSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.resolution_spinner);
-//	solo.pressSpinnerItem(1, positionNumber);
-//	String spinnerTest = resolutionSpinner.getItemAtPosition(positionNumber).toString();
-//	solo.clickOnView(saveButton);
-//	solo.clickOnImageButton(0);
-//	String test = resolutionSpinner.getSelectedItem().toString();
-//	assertEquals(spinnerTest, test);
-//	solo.clickOnView(defaultButton);
-//	solo.finishOpenedActivities();
-//}
-///**
-// * Tests that the preview spinner saves the specified preview size
-// */
-//public void testPreviewSettingPreference(){
-//	int positionNumber = 5;
-//	solo.clickOnImageButton(0);
-//	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
-//	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
-//	previewSizeSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.picture_size_spinner);
-//	solo.pressSpinnerItem(2, positionNumber);
-//	String spinnerTest = previewSizeSpinner.getItemAtPosition(positionNumber).toString();
-//	solo.clickOnView(saveButton);
-//	solo.clickOnImageButton(0);
-//	String test = previewSizeSpinner.getSelectedItem().toString();
-//	assertEquals(spinnerTest, test);
-//	solo.clickOnView(defaultButton);
-//	solo.finishOpenedActivities();
-//}
+/**
+ * Tests that the resolution spinner saves the specified resolution size
+ */
+public void testzResolutionSettingPreference(){
+	int positionNumber = 2;
+	solo.clickOnImageButton(0);
+	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
+	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
+	resolutionSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.resolution_spinner);
+	solo.pressSpinnerItem(1, positionNumber);
+	String spinnerTest = resolutionSpinner.getItemAtPosition(positionNumber).toString();
+	solo.clickOnView(saveButton);
+	solo.clickOnImageButton(0);
+	String test = resolutionSpinner.getSelectedItem().toString();
+	assertEquals(spinnerTest, test);
+	solo.clickOnView(defaultButton);
+	solo.finishOpenedActivities();
+}
+/**
+ * Tests that the preview spinner saves the specified preview size
+ */
+public void testzPreviewSettingPreference(){
+	int positionNumber = 2;
+	solo.clickOnImageButton(0);
+	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
+	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
+	previewSizeSpinner = (Spinner)cActivity.findViewById(com.catalyst.android.birdapp.R.id.picture_size_spinner);
+	solo.pressSpinnerItem(2, positionNumber);
+	String spinnerTest = previewSizeSpinner.getItemAtPosition(positionNumber).toString();
+	solo.clickOnView(saveButton);
+	solo.clickOnImageButton(0);
+	String test = previewSizeSpinner.getSelectedItem().toString();
+	assertEquals(spinnerTest, test);
+	solo.clickOnView(defaultButton);
+	solo.finishOpenedActivities();
+}
 
 /**
  * Tests that the white balance spinner saves the specified white balance setting
@@ -163,7 +163,7 @@ public void testParametersSetWhiteBalance(){
  * tests to make sure that the preview size parameters are being set on click on the save button
  */
 public void testParametersSetPreviewSize(){
-	int positionNumber = 5;
+	int positionNumber = 2;
 	solo.clickOnImageButton(0);
 	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
 	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
@@ -183,7 +183,7 @@ public void testParametersSetPreviewSize(){
  * tests to make sure that the resolution parameters are being set on click on the save button
  */
 public void testParametersSetResolution(){
-	int positionNumber = 5;
+	int positionNumber = 2;
 	solo.clickOnImageButton(0);
 	defaultButton = solo.getView(com.catalyst.android.birdapp.R.id.restore_defults_button);
 	saveButton = solo.getView(com.catalyst.android.birdapp.R.id.save_button);
