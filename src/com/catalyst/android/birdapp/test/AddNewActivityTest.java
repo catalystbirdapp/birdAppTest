@@ -1,7 +1,6 @@
 package com.catalyst.android.birdapp.test;
 
 import android.content.Context;
-import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -23,8 +22,6 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<MainAct
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		Intent i = new Intent();
-		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		solo = new Solo(getInstrumentation(), getActivity());
 	}
 
@@ -88,9 +85,9 @@ public class AddNewActivityTest extends ActivityInstrumentationTestCase2<MainAct
 			
 		//Test the settings menu button
 		solo.clickOnMenuItem("Settings");
-		solo.assertCurrentActivity("Add New Activity page", AddNewActivity.class);
-		assertTrue("on Add New Activity Form", solo.waitForText(solo.getString(R.string.addActivityTitleText).toString()));
-			
+		assertTrue("Settings are displayed", solo.waitForText("Prompt to turn on GPS"));
+		solo.goBack();
+		
 		//Test saving a blank activity name
 		solo.clickOnButton(solo.getString(R.string.saveButton).toString());
 		assertTrue("Error message for blank name", solo.waitForText(errorMessageBlank));

@@ -1,18 +1,12 @@
 package edit_form_tests;
 
-import android.content.Context;
-import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Spinner;
 
-import com.catalyst.android.birdapp.AddNewActivity;
 import com.catalyst.android.birdapp.BirdFormActivity;
 import com.catalyst.android.birdapp.MainActivity;
 import com.catalyst.android.birdapp.R;
 import com.catalyst.android.birdapp.RecordsActivity;
-import com.catalyst.android.birdapp.database.DatabaseHandler;
 import com.jayway.android.robotium.solo.Solo;
 
 public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
@@ -48,8 +42,6 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		Intent i = new Intent();
-		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		solo = new Solo(getInstrumentation(), getActivity());
 	}
 

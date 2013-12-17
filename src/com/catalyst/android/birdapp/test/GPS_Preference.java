@@ -1,6 +1,5 @@
 package com.catalyst.android.birdapp.test;
 
-import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.catalyst.android.birdapp.BirdFormActivity;
@@ -18,8 +17,6 @@ public class GPS_Preference extends ActivityInstrumentationTestCase2<MainActivit
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		Intent i = new Intent();
-		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		solo = new Solo(getInstrumentation(), getActivity());
 		
 		//Go to MAIN PAGE
