@@ -10,7 +10,7 @@ import android.widget.Spinner;
 import com.catalyst.android.birdapp.BirdFormActivity;
 import com.catalyst.android.birdapp.MainActivity;
 import com.catalyst.android.birdapp.R;
-import com.catalyst.android.birdapp.RecordsActivity;
+import com.catalyst.android.birdapp.ViewPastSightingsActivity;
 import com.catalyst.android.birdapp.database.DatabaseHandler;
 import com.catalyst.android.birdapp.entities.BirdSighting;
 import com.jayway.android.robotium.solo.Solo;
@@ -100,8 +100,7 @@ public class NewBirdSightingTest extends ActivityInstrumentationTestCase2<MainAc
 		//Now go to the SIGHTINGS LIST and verify truncated common name saved
 		solo.goBack();
 		solo.clickOnButton(solo.getString(R.string.reviewRecords).toString());
-		solo.assertCurrentActivity("Past Bird Sightings List", RecordsActivity.class);
-		assertTrue("on Bird Sightings List", solo.waitForText(solo.getString(R.string.title_activity_records).toString()));
+		solo.assertCurrentActivity("Past Bird Sightings List", ViewPastSightingsActivity.class);
 		assertTrue("Common Name", solo.waitForText(testSavedName));
 		
 		//Go to edit bird form and verify truncated common name is displayed
@@ -164,8 +163,7 @@ public class NewBirdSightingTest extends ActivityInstrumentationTestCase2<MainAc
 		//Now go to the SIGHTINGS LIST
 		solo.goBack();
 		solo.clickOnButton(solo.getString(R.string.reviewRecords).toString());
-		solo.assertCurrentActivity("Past Bird Sightings List", RecordsActivity.class);
-		assertTrue("on Bird Sightings List", solo.waitForText(solo.getString(R.string.title_activity_records).toString()));
+		solo.assertCurrentActivity("Past Bird Sightings List", ViewPastSightingsActivity.class);
 		
 		//Go to edit bird form and verify truncated scientific name is displayed
 		solo.clickOnText(testCommonName);
@@ -216,8 +214,7 @@ public class NewBirdSightingTest extends ActivityInstrumentationTestCase2<MainAc
 		//Now go to the SIGHTINGS LIST
 		solo.goBack();
 		solo.clickOnButton(solo.getString(R.string.reviewRecords).toString());
-		solo.assertCurrentActivity("Past Bird Sightings List", RecordsActivity.class);
-		assertTrue("on Bird Sightings List", solo.waitForText(solo.getString(R.string.title_activity_records).toString()));
+		solo.assertCurrentActivity("Past Bird Sightings List", ViewPastSightingsActivity.class);
 		
 		//Go to edit bird form and verify truncated notes are displayed
 		solo.clickOnText(testCommonName);
@@ -278,8 +275,7 @@ public class NewBirdSightingTest extends ActivityInstrumentationTestCase2<MainAc
 		//Now go to the SIGHTINGS LIST
 		solo.goBack();
 		solo.clickOnButton(solo.getString(R.string.reviewRecords).toString());
-		solo.assertCurrentActivity("Past Bird Sightings List", RecordsActivity.class);
-		assertTrue("on Bird Sightings List", solo.waitForText(solo.getString(R.string.title_activity_records).toString()));
+		solo.assertCurrentActivity("Past Bird Sightings List", ViewPastSightingsActivity.class);
 		
 		//Go to edit bird form and verify category and activity are displayed
 		solo.clickOnText(testCommonName);

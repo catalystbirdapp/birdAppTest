@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.catalyst.android.birdapp.BirdFormActivity;
 import com.catalyst.android.birdapp.MainActivity;
 import com.catalyst.android.birdapp.R;
-import com.catalyst.android.birdapp.RecordsActivity;
+import com.catalyst.android.birdapp.ViewPastSightingsActivity;
 import com.catalyst.android.birdapp.database.DatabaseHandler;
 import com.catalyst.android.birdapp.entities.BirdSighting;
 import com.jayway.android.robotium.solo.Solo;
@@ -116,8 +116,7 @@ public class SightingsList extends ActivityInstrumentationTestCase2<MainActivity
 		//Now go to the SIGHTINGS LIST
 		solo.goBack();
 		solo.clickOnButton("Review Past Sightings");
-		solo.assertCurrentActivity("Past Bird Sightings List", RecordsActivity.class);
-		assertTrue("on Bird Sightings List", solo.waitForText("Bird Sightings List"));
+		solo.assertCurrentActivity("Past Bird Sightings List", ViewPastSightingsActivity.class);
 		
 		//Verify test values are present in sightings list
 		assertTrue("Common Name list", solo.waitForText(testCommonName));

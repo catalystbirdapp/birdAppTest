@@ -11,7 +11,7 @@ import com.catalyst.android.birdapp.AddNewActivity;
 import com.catalyst.android.birdapp.BirdFormActivity;
 import com.catalyst.android.birdapp.MainActivity;
 import com.catalyst.android.birdapp.R;
-import com.catalyst.android.birdapp.RecordsActivity;
+import com.catalyst.android.birdapp.ViewPastSightingsActivity;
 import com.catalyst.android.birdapp.database.DatabaseHandler;
 import com.jayway.android.robotium.solo.Solo;
 
@@ -92,7 +92,7 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 		
 		//Go to the Review Past Sightings Screen
 		solo.clickOnButton(solo.getString(R.string.reviewRecords));
-		solo.assertCurrentActivity("Review Past Sightings Page", RecordsActivity.class);
+		solo.assertCurrentActivity("Review Past Sightings Page", ViewPastSightingsActivity.class);
 		
 		//Click on the saved sighting to go to the edit form
 		solo.clickOnText(commonName);
@@ -122,7 +122,7 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 		
 		//Submit the changes and verify that we are back at the view past sightings page
 		solo.clickOnButton(solo.getString(R.string.save_changes));
-		solo.assertCurrentActivity("Review Past Sightings Page", RecordsActivity.class);		
+		solo.assertCurrentActivity("Review Past Sightings Page", ViewPastSightingsActivity.class);		
 		
 		//Click on the saved sighting to go to the edit form
 		solo.clickOnText(tooLongNameShortened);
