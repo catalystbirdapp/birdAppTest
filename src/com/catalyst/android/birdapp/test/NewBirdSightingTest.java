@@ -1,7 +1,6 @@
 package com.catalyst.android.birdapp.test;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
@@ -25,8 +24,6 @@ public class NewBirdSightingTest extends ActivityInstrumentationTestCase2<MainAc
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		Intent i = new Intent();
-		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		solo = new Solo(getInstrumentation(), getActivity());
 	}
 

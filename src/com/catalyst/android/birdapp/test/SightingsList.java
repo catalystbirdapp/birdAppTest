@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
@@ -30,8 +29,6 @@ public class SightingsList extends ActivityInstrumentationTestCase2<MainActivity
 	
 	protected void setUp() throws Exception {
 		super.setUp();
-		Intent i = new Intent();
-		i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		solo = new Solo(getInstrumentation(), getActivity());
 	}
 
@@ -164,6 +161,7 @@ public class SightingsList extends ActivityInstrumentationTestCase2<MainActivity
 		assertTrue("Save message displayed", solo.waitForText("Your Sighting Has Been Saved"));
 		
 		//Verify test values are present in SIGHTINGS LIST
+		solo.scrollUp();
 		assertTrue("Common Name changed to " + changedCommonName, solo.waitForText(changedCommonName));
 		assertTrue("Category in list " + category, solo.waitForText(category));
 		assertTrue("Date in list " + formattedDate, solo.waitForText(formattedDate));
@@ -174,6 +172,26 @@ public class SightingsList extends ActivityInstrumentationTestCase2<MainActivity
 		solo.finishOpenedActivities();
 	}
 	
+	public void testApplicationSettings() {
+		//Go to MAIN PAGE
+		solo.assertCurrentActivity("Main Activity Page", MainActivity.class);
+		
+		//Navigate to new BIRD FORM page
+		solo.clickOnButton(solo.getString(R.string.submitButton).toString());
+		
+		//Deal with GPS prompt
+		if (solo.waitForText("GPS is turned OFF")) {
+			solo.clickOnButton("NO");
+			assertTrue(solo.waitForText("Prompting for GPS has been disabled"));
+		}
+		
+		//Test the settings menu button
+		solo.clickOnMenuItem("Settings");
+		assertTrue("Settings are displayed", solo.waitForText("Prompt to turn on GPS"));
+		solo.goBack();
+		
+		solo.finishOpenedActivities();
+	}
 	private void deleteBirdSighting(BirdSighting birdSighting, Context context) {
 		DatabaseHandler dbHandler = DatabaseHandler.getInstance(context);
 		dbHandler.deleteBirdSighting(birdSighting.getId());
