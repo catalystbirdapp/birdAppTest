@@ -204,8 +204,7 @@ public void testParametersSetResolution(){
  */
 
 public void testParametersSetZoom(){
-	int positionNumber = 5;
-	int test1 = 0;
+	int positionNumber = 2;
 	String firstNumber;
 	String secondNumber;
 	solo.clickOnImageButton(0);
@@ -218,8 +217,7 @@ public void testParametersSetZoom(){
 	params = camera.getParameters();
 	int spinnerNumber = zoomSpinner.getCount();	
 	if(positionNumber == spinnerNumber - 1){
-		
-		assertEquals(params.getZoom(), (spinnerNumber *10) - 1);
+		assertEquals(params.getZoom(), (spinnerNumber *10));
 	}else {
 	firstNumber = String.valueOf(params.getZoom()).substring(0,1);
 	secondNumber = String.valueOf(params.getZoom()).substring(1,2);
