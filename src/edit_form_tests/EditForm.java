@@ -1,5 +1,7 @@
 package edit_form_tests;
 
+import android.content.Context;
+import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
@@ -8,7 +10,7 @@ import com.catalyst.android.birdapp.MainActivity;
 import com.catalyst.android.birdapp.R;
 import com.catalyst.android.birdapp.ViewPastSightingsActivity;
 import com.catalyst.android.birdapp.database.DatabaseHandler;
-import com.catalyst.android.birdapp.RecordsActivity;
+import com.catalyst.android.birdapp.entities.BirdSighting;
 import com.jayway.android.robotium.solo.Solo;
 
 public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
@@ -36,6 +38,10 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
     private EditText commonNameEditText, 
                      scientificNameEditText, 
                      notesEditText;
+    
+    private Bundle bundle;
+    private BirdSighting birdSighting;
+    private Context context;
         
 
 	public EditForm() {
@@ -112,6 +118,11 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 		assertEquals(tooLongNameShortened, commonNameEditText.getText().toString());
 		assertEquals(tooLongNameShortened, scientificNameEditText.getText().toString());
 		
+		//Get the bird sighting info so that it can be deleted later
+		bundle = solo.getCurrentActivity().getIntent().getExtras();
+		birdSighting = (BirdSighting) bundle.getSerializable(BirdSighting.BIRD_SIGHTING);
+		context = solo.getCurrentActivity().getApplicationContext();
+		
 		changeActivityCategoryAndNotes();
 		
 		//Submit the changes and verify that we are back at the view past sightings page
@@ -126,6 +137,9 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 		assertEquals(tooLongNameShortened, scientificNameEditText.getText().toString());
 		assertTrue(solo.waitForText(newNotes));
 		assertTrue(solo.waitForText(MATING));
+		
+		//Clean up by deleting the test sighting
+		deleteBirdSighting(birdSighting, context);
 		
 		solo.finishOpenedActivities();
 	}
@@ -220,6 +234,12 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 		//SubmitBirdForm
 		solo.clickOnButton(solo.getString(R.string.submitButtonText));
 		solo.goBack();
+		solo.sleep(1000);
+	}
+	
+	private void deleteBirdSighting(BirdSighting birdSighting, Context context) {
+		DatabaseHandler dbHandler = DatabaseHandler.getInstance(context);
+		dbHandler.deleteBirdSighting(birdSighting.getId());
 	}
 	
 }
