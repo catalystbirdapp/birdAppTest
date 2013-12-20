@@ -233,8 +233,8 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 		
 		//SubmitBirdForm
 		solo.clickOnButton(solo.getString(R.string.submitButtonText));
+		assertTrue("Save message displayed", solo.waitForText(solo.getString(R.string.sightingAddedBlankName).toString()));
 		solo.goBack();
-		solo.sleep(1000);
 	}
 	
 	private void deleteBirdSighting(BirdSighting birdSighting, Context context) {
