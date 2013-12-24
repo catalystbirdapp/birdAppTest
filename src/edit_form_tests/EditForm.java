@@ -1,5 +1,6 @@
 package edit_form_tests;
 
+import test_utilities.UtilityMethods;
 import android.content.Context;
 import android.os.Bundle;
 import android.test.ActivityInstrumentationTestCase2;
@@ -17,8 +18,6 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 	
     private static final String MISC = "Misc",
     						    MATING = "Mating",
-    						    NEST = "Nest",
-    						    FLYING = "Flying",
     						    SIGHTING = "Sighting",
     					    	HUNTING = "Hunting";;
     					    	
@@ -51,6 +50,9 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 	protected void setUp() throws Exception {
 		super.setUp();
 		solo = new Solo(getInstrumentation(), getActivity());
+		UtilityMethods.dealWithGPSPrompt(solo);
+		//Go back to main activity
+		solo.goBack();
 	}
 
 	@Override
@@ -65,27 +67,15 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 		super.tearDown();
 	}
 	
-	public void testDealWithGPSPrompt() {
+	public void testSubmitSightingViewEditForm() {
 		//Go to MAIN PAGE
 		solo.assertCurrentActivity("Main Activity Page", MainActivity.class);
 		
 		//Navigate to new BIRD FORM page
 		solo.clickOnButton(solo.getString(R.string.submitButton).toString());
+		solo.assertCurrentActivity("Bird Sighting Page", BirdFormActivity.class);
 		
-		//Deal with GPS prompt
-		if (solo.waitForText("GPS is turned OFF")) {
-			solo.clickOnButton("NO");
-			assertTrue(solo.waitForText("Prompting for GPS has been disabled"));
-		}
-		
-		solo.finishOpenedActivities();
-	}
-	
-	public void testSubmitSightingViewEditForm() {
-		//Go to MAIN PAGE
-		solo.assertCurrentActivity("Main Activity Page", MainActivity.class);
-		
-		submitNewBirdSighting();
+		UtilityMethods.submitNewBirdSighting(solo, commonNameEditText, scientificNameEditText, notesEditText);
 		
 		//Verify that we are on the splash screen
 		solo.assertCurrentActivity("Main Activity Page", MainActivity.class);
@@ -139,7 +129,7 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 		assertTrue(solo.waitForText(MATING));
 		
 		//Clean up by deleting the test sighting
-		deleteBirdSighting(birdSighting, context);
+		UtilityMethods.deleteBirdSighting(birdSighting, context);
 		
 		solo.finishOpenedActivities();
 	}
@@ -178,6 +168,7 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 		
 		//Attempt to submit, then check for error messages
 		solo.clickOnButton(solo.getString(R.string.save_changes));
+		solo.scrollUp();
 		assertTrue(solo.waitForText(solo.getString(R.string.bird_name_alpha_error)));
 		
 		//Clear the Common name and put in a name that is too long
@@ -206,40 +197,12 @@ public class EditForm extends ActivityInstrumentationTestCase2<MainActivity> {
 		
 		//Attempt to submit, then check for error messages
 		solo.clickOnButton(solo.getString(R.string.save_changes));
+		solo.scrollUp();
 		assertTrue(solo.waitForText(solo.getString(R.string.bird_name_alpha_error)));
 		
 		//Clear the Common name and put in a valid entry
 		solo.clearEditText(commonNameEditText);
 		solo.enterText(commonNameEditText, validCommonName);
-	}
-
-	private void submitNewBirdSighting() {
-		//Navigate to new BIRD FORM page
-		solo.clickOnButton(solo.getString(R.string.submitButton).toString());
-		solo.assertCurrentActivity("Bird Sighting Page", BirdFormActivity.class);
-		assertTrue("on Bird Sighting Form", solo.waitForText(solo.getString(R.string.formTitle).toString()));
-		
-		//Populate Fields for sighting
-		commonNameEditText = (EditText) solo.getView(R.id.common_name_edit_text);
-		scientificNameEditText = (EditText) solo.getView(R.id.scientific_name_edit_text);
-		notesEditText = (EditText) solo.getView(R.id.notes_edit_text);
-		solo.enterText(commonNameEditText, commonName);
-		solo.enterText(scientificNameEditText, scientificName);
-		solo.enterText(notesEditText, notes);
-		solo.clickOnText(FLYING);
-		solo.clickOnText(HUNTING);
-		solo.clickOnText(NEST);
-		solo.clickOnText(MISC);
-		
-		//SubmitBirdForm
-		solo.clickOnButton(solo.getString(R.string.submitButtonText));
-		assertTrue("Save message displayed", solo.waitForText(solo.getString(R.string.sightingAddedBlankName).toString()));
-		solo.goBack();
-	}
-	
-	private void deleteBirdSighting(BirdSighting birdSighting, Context context) {
-		DatabaseHandler dbHandler = DatabaseHandler.getInstance(context);
-		dbHandler.deleteBirdSighting(birdSighting.getId());
 	}
 	
 }
